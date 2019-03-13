@@ -1,14 +1,20 @@
 package com.yurima.weightloser.food;
 
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yurima.weightloser.R;
+import com.yurima.weightloser.database.DbContract;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +31,24 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     String[] values = new String[] {"100cal", "200cal", "50cal"};
     //end mock data
 
-    public FoodListAdapter(){
+    //Real data
+    List<String> namesList = new ArrayList<>();
+    List<String> unitsList = new ArrayList<>();
+    List<String> valuesList = new ArrayList<>();
+
+
+    public FoodListAdapter(Cursor cursor){
         //TODO get data from parameters
+
+        cursor.moveToFirst();
+
+
+        while(cursor.moveToNext()) {
+            namesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)));
+            unitsList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)));
+            valuesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_VALUE)));
+        }
+        cursor.close();
     }
 
     @Override
@@ -38,9 +60,14 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.nameTextView.setText(names[position]);
-        holder.unitTextView.setText(units[position]);
-        holder.valueTextView.setText(values[position]);
+//        holder.nameTextView.setText(names[position]);
+//        holder.unitTextView.setText(units[position]);
+//        holder.valueTextView.setText(values[position]);
+          holder.nameTextView.setText(namesList.get(position));
+          holder.unitTextView.setText(unitsList.get(position));
+          holder.valueTextView.setText(valuesList.get(position));
+
+
     }
 
     @Override
