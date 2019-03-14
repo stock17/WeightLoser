@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.yurima.weightloser.database.DbContract;
 import com.yurima.weightloser.database.DbHelper;
@@ -34,7 +35,7 @@ public class FoodActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // create table
-//        insertEntry("tie", "100 gr", "300 cal");
+        insertEntry("tie", "100 gr", "300 cal");
 //        insertEntry("coffee", "100 gr", "200 cal");
 //        insertEntry("cacao", "100 gr", "50 cal");
 
@@ -59,6 +60,17 @@ public class FoodActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_food_activity, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_drop_food_table) {
+            SQLiteDatabase db = mHelper.getWritableDatabase();
+            db.execSQL("DROP TABLE IF EXISTS " + DbContract.FoodEntry.TABLE_NAME);
+            db.close();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private Cursor readTable(){
