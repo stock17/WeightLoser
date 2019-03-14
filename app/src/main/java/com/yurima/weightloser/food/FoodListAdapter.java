@@ -40,9 +40,6 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     public FoodListAdapter(Cursor cursor){
         //TODO get data from parameters
 
-        cursor.moveToFirst();
-
-
         while(cursor.moveToNext()) {
             namesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)));
             unitsList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)));
@@ -59,10 +56,7 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-//        holder.nameTextView.setText(names[position]);
-//        holder.unitTextView.setText(units[position]);
-//        holder.valueTextView.setText(values[position]);
+    public void onBindViewHolder(ViewHolder holder, int position) {//
           holder.nameTextView.setText(namesList.get(position));
           holder.unitTextView.setText(unitsList.get(position));
           holder.valueTextView.setText(valuesList.get(position));
@@ -72,7 +66,7 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
 
     @Override
     public int getItemCount() {
-        return names.length;
+        return namesList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
