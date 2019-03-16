@@ -1,6 +1,8 @@
 package com.yurima.weightloser;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,7 +37,7 @@ public class FoodActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // create table
-        insertEntry("tie", "100 gr", "300 cal");
+//        insertEntry("tie", "100 gr", "300 cal");
 //        insertEntry("coffee", "100 gr", "200 cal");
 //        insertEntry("cacao", "100 gr", "50 cal");
 
@@ -70,6 +72,32 @@ public class FoodActivity extends AppCompatActivity {
             db.close();
             return true;
         }
+
+        if (item.getItemId() == R.id.item_remove_food_table) {
+            //TODO open the remove form
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("Remove Item")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setView(getLayoutInflater().inflate(R.layout.dialog_remove_item, null))
+            ;
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

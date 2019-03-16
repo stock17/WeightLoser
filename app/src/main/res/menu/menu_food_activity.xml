@@ -3,5 +3,7 @@
     <item
         android:id="@+id/item_drop_food_table"
         android:title="DROP TABLE"/>
+    <item android:id="@+id/item_remove_food_table"
+        android:title="REMOVE"/>
 
 </menu>
