@@ -35,4 +35,5 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_FOOD_TABLE);
         onCreate(db);
     }
+
 }
