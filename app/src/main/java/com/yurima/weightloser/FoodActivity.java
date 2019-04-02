@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.yurima.weightloser.database.DbContract;
@@ -22,6 +23,8 @@ import java.sql.RowId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class FoodActivity extends AppCompatActivity {
 
@@ -78,11 +81,13 @@ public class FoodActivity extends AppCompatActivity {
             //TODO open the remove form
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            View view = getLayoutInflater().inflate(R.layout.dialog_remove_item, null);
+            final EditText et = (EditText) view.findViewById (R.id.et_remove_food_table);
+
             builder
                     .setTitle("Remove Item")
-                    .setView(getLayoutInflater().inflate(R.layout.dialog_remove_item, null));
-            final EditText et = (EditText) findViewById (R.id.et_remove_food_table);
-            builder
+                    .setView(view)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -114,8 +119,8 @@ public class FoodActivity extends AppCompatActivity {
 
     private void removeItemFromTable(String itemTitle) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
-        String com = "TITLE = 'tie'";
-        db.delete(DbContract.FoodEntry.TABLE_NAME, com, null);
+        String whereClause = "TITLE = '" + itemTitle+ "'";
+        db.delete(DbContract.FoodEntry.TABLE_NAME, whereClause, null);
 //        db.delete(DbContract.FoodEntry.TABLE_NAME, DbContract.FoodEntry.COLUMN_NAME_TITLE + " = " + itemTitle, null);
         db.close();
     }
