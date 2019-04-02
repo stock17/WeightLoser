@@ -33,6 +33,8 @@ public class FoodActivity extends AppCompatActivity {
 
     SQLiteOpenHelper mHelper = new DbHelper(this);
 
+    FoodListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +42,13 @@ public class FoodActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        // create table
-//        insertEntry("tie", "100 gr", "300 cal");
-//        insertEntry("coffee", "100 gr", "200 cal");
-//        insertEntry("cacao", "100 gr", "50 cal");
+//        createMockTable();
+
 
         Cursor cursor = readTable();
 
         foodListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FoodListAdapter adapter = new FoodListAdapter(cursor);
+        adapter = new FoodListAdapter(cursor);
         foodListRecyclerView.setAdapter(adapter);
     }
 
@@ -78,10 +78,8 @@ public class FoodActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.item_remove_food_table) {
-            //TODO open the remove form
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
             View view = getLayoutInflater().inflate(R.layout.dialog_remove_item, null);
             final EditText et = (EditText) view.findViewById (R.id.et_remove_food_table);
 
@@ -121,7 +119,19 @@ public class FoodActivity extends AppCompatActivity {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         String whereClause = "TITLE = '" + itemTitle+ "'";
         db.delete(DbContract.FoodEntry.TABLE_NAME, whereClause, null);
-//        db.delete(DbContract.FoodEntry.TABLE_NAME, DbContract.FoodEntry.COLUMN_NAME_TITLE + " = " + itemTitle, null);
-        db.close();
+        Cursor cursor = readTable();
+        adapter.onChangeDataSet(cursor);
+
+    }
+
+    private void createMockTable() {
+        insertEntry("tie", "100 gr", "300 cal");
+        insertEntry("coffee", "100 gr", "200 cal");
+        insertEntry("bread", "100 gr", "500 cal");
+        insertEntry("butter", "100 gr", "350 cal");
+        insertEntry("soup", "100 gr", "237 cal");
+        insertEntry("cereal", "100 gr", "138 cal");
+        insertEntry("porridge", "100 gr", "111 cal");
+        insertEntry("vodka", "100 gr", "1050 cal");
     }
 }

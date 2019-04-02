@@ -25,12 +25,6 @@ import butterknife.ButterKnife;
 
 public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewHolder> {
 
-    //mockData
-    String[] names = new String[] {"cereal", "soup", "salad"};
-    String[] units = new String[] {"100gr", "100gr", "100gr"};
-    String[] values = new String[] {"100cal", "200cal", "50cal"};
-    //end mock data
-
     //Real data
     List<String> namesList = new ArrayList<>();
     List<String> unitsList = new ArrayList<>();
@@ -60,8 +54,6 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
           holder.nameTextView.setText(namesList.get(position));
           holder.unitTextView.setText(unitsList.get(position));
           holder.valueTextView.setText(valuesList.get(position));
-
-
     }
 
     @Override
@@ -80,6 +72,16 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
             ButterKnife.bind(this, view);
             //nameTextView = (TextView) view.findViewById(R.id.tv_food_list_name);
         }
+    }
+
+    public void onChangeDataSet(Cursor cursor){
+        while(cursor.moveToNext()) {
+            namesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)));
+            unitsList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)));
+            valuesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_VALUE)));
+        }
+        cursor.close();
+        notifyDataSetChanged();
     }
 
 
