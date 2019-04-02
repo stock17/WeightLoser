@@ -13,21 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DBAdapter {
+public class DbAdapter {
     SQLiteOpenHelper mHelper;
     SQLiteDatabase mDatabase;
     Context mContext;
 
-    public DBAdapter(Context context) {
+    public DbAdapter(Context context) {
         mContext = context;
+        mHelper = new DbHelper(context);
     }
 
     public void openDB(){
-        mDatabase = mHelper.getWritableDatabase();
+        if (mDatabase == null)
+            mDatabase = mHelper.getWritableDatabase();
     }
 
     public void closeDB(){
-        mDatabase.close();
+        if (mDatabase != null)
+            mDatabase.close();
     }
 
     public long insertFood (String title, String unit, String value) {
@@ -54,5 +57,16 @@ public class DBAdapter {
             );
         }
         return foodList;
+    }
+
+    private void createMockTable() {
+        insertFood("tie", "100 gr", "300 cal");
+        insertFood("coffee", "100 gr", "200 cal");
+        insertFood("bread", "100 gr", "500 cal");
+        insertFood("butter", "100 gr", "350 cal");
+        insertFood("soup", "100 gr", "237 cal");
+        insertFood("cereal", "100 gr", "138 cal");
+        insertFood("porridge", "100 gr", "111 cal");
+        insertFood("vodka", "100 gr", "1050 cal");
     }
 }

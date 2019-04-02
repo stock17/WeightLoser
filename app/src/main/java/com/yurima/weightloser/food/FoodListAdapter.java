@@ -19,27 +19,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Yury on 13.03.2019.
- */
-
 public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewHolder> {
 
-    //Real data
-    List<String> namesList = new ArrayList<>();
-    List<String> unitsList = new ArrayList<>();
-    List<String> valuesList = new ArrayList<>();
+    List<Food> foods = new ArrayList<>();
 
-
-    public FoodListAdapter(Cursor cursor){
-        //TODO get data from parameters
-
-        while(cursor.moveToNext()) {
-            namesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)));
-            unitsList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)));
-            valuesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_VALUE)));
-        }
-        cursor.close();
+    public FoodListAdapter(List<Food> foods){
+        this.foods = foods;
     }
 
     @Override
@@ -51,18 +36,18 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {//
-          holder.nameTextView.setText(namesList.get(position));
-          holder.unitTextView.setText(unitsList.get(position));
-          holder.valueTextView.setText(valuesList.get(position));
+          holder.nameTextView.setText(foods.get(position).getTitle());
+          holder.unitTextView.setText(foods.get(position).getUnit());
+          holder.valueTextView.setText(foods.get(position).getValue());
     }
 
     @Override
     public int getItemCount() {
-        return namesList.size();
+        return foods.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        //TextView nameTextView;
+
         @BindView(R.id.tv_food_list_name) TextView nameTextView;
         @BindView(R.id.tv_food_list_unit) TextView unitTextView;
         @BindView(R.id.tv_food_list_value) TextView valueTextView;
@@ -70,17 +55,11 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
         ViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
-            //nameTextView = (TextView) view.findViewById(R.id.tv_food_list_name);
         }
     }
 
-    public void onChangeDataSet(Cursor cursor){
-        while(cursor.moveToNext()) {
-            namesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)));
-            unitsList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)));
-            valuesList.add(cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_VALUE)));
-        }
-        cursor.close();
+    public void onChangeDataSet(List<Food> foods){
+        this.foods = foods;
         notifyDataSetChanged();
     }
 

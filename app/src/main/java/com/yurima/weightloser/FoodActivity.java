@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.yurima.weightloser.database.DbAdapter;
 import com.yurima.weightloser.database.DbContract;
 import com.yurima.weightloser.database.DbHelper;
 import com.yurima.weightloser.food.FoodListAdapter;
@@ -30,9 +31,7 @@ public class FoodActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_food_list)
     RecyclerView foodListRecyclerView;
-
-    SQLiteOpenHelper mHelper = new DbHelper(this);
-
+    DbAdapter mDbAdapter;
     FoodListAdapter adapter;
 
     @Override
@@ -40,26 +39,20 @@ public class FoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
+        mDbAdapter = new DbAdapter(this);
+        mDbAdapter.openDB();
+
         ButterKnife.bind(this);
 
 //        createMockTable();
 
-
-        Cursor cursor = readTable();
-
         foodListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new FoodListAdapter(cursor);
+        adapter = new FoodListAdapter(mDbAdapter.getFoods());
         foodListRecyclerView.setAdapter(adapter);
     }
 
-    private void insertEntry(String title, String unit, String value) {
-        SQLiteDatabase db = mHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(DbContract.FoodEntry.COLUMN_NAME_TITLE, title);
-        values.put(DbContract.FoodEntry.COLUMN_NAME_UNIT, unit);
-        values.put(DbContract.FoodEntry.COLUMN_NAME_VALUE, value);
-        long newRowId = db.insert(DbContract.FoodEntry.TABLE_NAME, null, values);
-        db.close();
+    private void insertFood(String title, String unit, String value) {
+        mDbAdapter.insertFood(title, unit, value);
     }
 
     @Override
@@ -71,9 +64,10 @@ public class FoodActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_drop_food_table) {
-            SQLiteDatabase db = mHelper.getWritableDatabase();
-            db.execSQL("DROP TABLE IF EXISTS " + DbContract.FoodEntry.TABLE_NAME);
-            db.close();
+            //TODO clear table
+//            SQLiteDatabase db = mHelper.getWritableDatabase();
+//            db.execSQL("DROP TABLE IF EXISTS " + DbContract.FoodEntry.TABLE_NAME);
+//            db.close();
             return true;
         }
 
@@ -109,29 +103,21 @@ public class FoodActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private Cursor readTable(){
-        SQLiteDatabase db = mHelper.getReadableDatabase();
-        Cursor cursor = db.query(DbContract.FoodEntry.TABLE_NAME, null, null, null,null,null,null);
-        return cursor;
-    }
-
-    private void removeItemFromTable(String itemTitle) {
-        SQLiteDatabase db = mHelper.getWritableDatabase();
-        String whereClause = "TITLE = '" + itemTitle+ "'";
-        db.delete(DbContract.FoodEntry.TABLE_NAME, whereClause, null);
-        Cursor cursor = readTable();
-        adapter.onChangeDataSet(cursor);
+       private void removeItemFromTable(String itemTitle) {
+        mDbAdapter.deleteFood(itemTitle);
+        adapter.onChangeDataSet(mDbAdapter.getFoods());
 
     }
 
-    private void createMockTable() {
-        insertEntry("tie", "100 gr", "300 cal");
-        insertEntry("coffee", "100 gr", "200 cal");
-        insertEntry("bread", "100 gr", "500 cal");
-        insertEntry("butter", "100 gr", "350 cal");
-        insertEntry("soup", "100 gr", "237 cal");
-        insertEntry("cereal", "100 gr", "138 cal");
-        insertEntry("porridge", "100 gr", "111 cal");
-        insertEntry("vodka", "100 gr", "1050 cal");
+    @Override
+    protected void onStart() {
+        mDbAdapter.openDB();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        mDbAdapter.closeDB();
+        super.onStop();
     }
 }
