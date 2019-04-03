@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -40,6 +41,8 @@ public class FoodActivity extends AppCompatActivity {
         foodListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FoodListAdapter(mDbAdapter.getItems());
         foodListRecyclerView.setAdapter(adapter);
+        foodListRecyclerView.addItemDecoration(new DividerItemDecoration(
+                foodListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @Override

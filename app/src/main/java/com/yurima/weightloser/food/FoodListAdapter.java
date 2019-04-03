@@ -32,19 +32,7 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.nameTextView.setText(foods.get(position).getTitle());
-        int intUnitType = foods.get(position).getUnit();
-        String stringUnitType;
-        switch (intUnitType){
-            case 1:
-                stringUnitType = "100 ml";
-                break;
-            case 2:
-                stringUnitType = "1 piece";
-                break;
-            default:
-                stringUnitType = "100 gr";
-        }
-        holder.unitTextView.setText(stringUnitType);
+        holder.unitTextView.setText(foods.get(position).getStringUnit());
         holder.valueTextView.setText(String.valueOf(foods.get(position).getValue()));
     }
 
@@ -69,6 +57,4 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
         this.foods = foods;
         notifyDataSetChanged();
     }
-
-
 }

@@ -24,6 +24,17 @@ public class Food {
         return unitType;
     }
 
+    public String getStringUnit() {
+        switch (unitType){
+            case 1:
+                return "100 ml";
+            case 2:
+                return "1 piece";
+            default:
+                return "100 gr";
+        }
+    }
+
     public void setUnit(int unit) {
         this.unitType = unitType;
     }
