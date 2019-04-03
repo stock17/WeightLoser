@@ -32,10 +32,10 @@ public class DbAdapter {
             mDatabase.close();
     }
 
-    public long insertItem(String title, String unit, int value) {
+    public long insertItem(String title, int unit, int value) {
         ContentValues values = new ContentValues();
         values.put(DbContract.FoodEntry.COLUMN_NAME_TITLE, title);
-        values.put(DbContract.FoodEntry.COLUMN_NAME_UNIT, unit);
+        values.put(DbContract.FoodEntry.COLUMN_NAME_UNITTYPE, unit);
         values.put(DbContract.FoodEntry.COLUMN_NAME_VALUE, value);
         return mDatabase.insert(DbContract.FoodEntry.TABLE_NAME, null, values);
     }
@@ -55,7 +55,7 @@ public class DbAdapter {
         while(cursor.moveToNext()) {
             foodList.add(new Food (
                     cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_TITLE)),
-                    cursor.getString(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNIT)),
+                    cursor.getInt(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_UNITTYPE)),
                     cursor.getInt(cursor.getColumnIndex(DbContract.FoodEntry.COLUMN_NAME_VALUE)))
             );
         }
@@ -63,13 +63,13 @@ public class DbAdapter {
     }
 
     private void createMockTable() {
-        insertItem("tie", "100 gr", 300);
-        insertItem("coffee", "100 gr", 200);
-        insertItem("bread", "100 gr", 500);
-        insertItem("butter", "100 gr", 350);
-        insertItem("soup", "100 gr", 237);
-        insertItem("cereal", "100 gr", 138);
-        insertItem("porridge", "100 gr", 111);
-        insertItem("vodka", "100 gr", 1050);
+        insertItem("tie", 1, 300);
+        insertItem("coffee", 1, 200);
+        insertItem("bread", 2, 500);
+        insertItem("butter", 0, 350);
+        insertItem("soup", 1, 237);
+        insertItem("cereal", 0, 138);
+        insertItem("porridge", 0, 111);
+        insertItem("vodka", 1, 1050);
     }
 }

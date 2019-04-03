@@ -2,13 +2,13 @@ package com.yurima.weightloser.food;
 
 public class Food {
     private String title;
-    private String unit;
+    private int unitType;
     private int value;
 
 
-    public Food(String title, String unit, int value) {
+    public Food(String title, int unitType, int value) {
         this.title = title;
-        this.unit = unit;
+        this.unitType = unitType;
         this.value = value;
     }
 
@@ -20,12 +20,12 @@ public class Food {
         this.title = title;
     }
 
-    public String getUnit() {
-        return unit;
+    public int getUnit() {
+        return unitType;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setUnit(int unit) {
+        this.unitType = unitType;
     }
 
     public int getValue() {

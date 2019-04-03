@@ -10,12 +10,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.database.DbAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.value;
 
 public class FoodActivity extends AppCompatActivity {
 
@@ -94,11 +97,11 @@ public class FoodActivity extends AppCompatActivity {
 
 
     private void onInsertButtonClick() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_insert_item, null);
-        final EditText title = (EditText) view.findViewById (R.id.et_insert_food_title);
-        final EditText unit = (EditText) view.findViewById (R.id.et_insert_food_unit);
-        final EditText value = (EditText) view.findViewById (R.id.et_insert_food_value);
+        final EditText titleEditText = (EditText) view.findViewById (R.id.et_insert_food_title);
+        final RadioGroup unitTypeRadioGroup = (RadioGroup) view.findViewById (R.id.radiogroup_unittype);
+        final EditText valueEditText = (EditText) view.findViewById (R.id.et_insert_food_value);
 
         builder
                 .setTitle("Insert Item")
@@ -106,10 +109,24 @@ public class FoodActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String stringTitle = title.getText().toString();
-                        String stringUnit = unit.getText().toString();
-                        String stringValue = value.getText().toString();
-                        insertFood(stringTitle, stringUnit, stringValue);
+                        String title = titleEditText.getText().toString();
+                        int checkedRadioButtonId = unitTypeRadioGroup.getCheckedRadioButtonId();
+                        int type;
+                        switch (checkedRadioButtonId) {
+                            case R.id.rb_typefood_100gr:
+                                type = 0;
+                                break;
+                            case R.id.rb_typefood_100ml:
+                                type = 1;
+                                break;
+                            case R.id.rb_typefood_1pc:
+                                type = 3;
+                                break;
+                            default:
+                                type = 0;
+                        }
+                        int value = Integer.parseInt(valueEditText.getText().toString());
+                        insertFood(title, type, value);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -129,8 +146,8 @@ public class FoodActivity extends AppCompatActivity {
         adapter.onChangeDataSet(mDbAdapter.getItems());
     }
 
-    private void insertFood(String title, String unit, String value) {
-        mDbAdapter.insertItem(title, unit, Integer.parseInt(value));
+    private void insertFood(String title, int unit, int value) {
+        mDbAdapter.insertItem(title, unit, value);
         adapter.onChangeDataSet(mDbAdapter.getItems());
     }
 

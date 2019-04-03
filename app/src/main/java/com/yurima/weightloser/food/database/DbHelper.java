@@ -14,8 +14,8 @@ public class DbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + FoodEntry.TABLE_NAME + " (" +
                     FoodEntry._ID + " INTEGER PRIMARY KEY," +
                     FoodEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    FoodEntry.COLUMN_NAME_UNIT + " TEXT," +
-                    FoodEntry.COLUMN_NAME_VALUE + " TEXT)";
+                    FoodEntry.COLUMN_NAME_UNITTYPE + " INTEGER," +
+                    FoodEntry.COLUMN_NAME_VALUE + " INTEGER)";
 
     private static final String SQL_DELETE_FOOD_TABLE =
             "DROP TABLE IF EXISTS " + FoodEntry.TABLE_NAME;
