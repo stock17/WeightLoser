@@ -1,9 +1,9 @@
-package com.yurima.weightloser.database;
+package com.yurima.weightloser.food.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.yurima.weightloser.database.DbContract.FoodEntry;
+import com.yurima.weightloser.food.database.DbContract.FoodEntry;
 
 public class DbHelper extends SQLiteOpenHelper {
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/item_drop_food_table"
-        android:title="DROP TABLE"/>
+
     <item android:id="@+id/item_insert_food_table"
         android:title="INSERT"/>
     <item android:id="@+id/item_remove_food_table"
         android:title="REMOVE"/>
+    <item android:id="@+id/item_drop_food_table"
+        android:title="CLEAR"/>
 
 </menu>

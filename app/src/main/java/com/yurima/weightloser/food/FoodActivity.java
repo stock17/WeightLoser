@@ -1,11 +1,7 @@
-package com.yurima.weightloser;
+package com.yurima.weightloser.food;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,17 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.yurima.weightloser.database.DbAdapter;
-import com.yurima.weightloser.database.DbContract;
-import com.yurima.weightloser.database.DbHelper;
-import com.yurima.weightloser.food.FoodListAdapter;
-
-import java.sql.RowId;
+import com.yurima.weightloser.R;
+import com.yurima.weightloser.food.database.DbAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class FoodActivity extends AppCompatActivity {
 
@@ -44,14 +34,10 @@ public class FoodActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-//        createMockTable();
-
         foodListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new FoodListAdapter(mDbAdapter.getFoods());
+        adapter = new FoodListAdapter(mDbAdapter.getItems());
         foodListRecyclerView.setAdapter(adapter);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,10 +48,7 @@ public class FoodActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_drop_food_table) {
-            //TODO clear table
-//            SQLiteDatabase db = mHelper.getWritableDatabase();
-//            db.execSQL("DROP TABLE IF EXISTS " + DbContract.FoodEntry.TABLE_NAME);
-//            db.close();
+            onClearTableButtonClick();
             return true;
         }
 
@@ -141,14 +124,19 @@ public class FoodActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void onClearTableButtonClick() {
+        mDbAdapter.clearTable();
+        adapter.onChangeDataSet(mDbAdapter.getItems());
+    }
+
     private void insertFood(String title, String unit, String value) {
-        mDbAdapter.insertFood(title, unit, value);
-        adapter.onChangeDataSet(mDbAdapter.getFoods());
+        mDbAdapter.insertItem(title, unit, Integer.parseInt(value));
+        adapter.onChangeDataSet(mDbAdapter.getItems());
     }
 
     private void removeItemFromTable(String itemTitle) {
-        mDbAdapter.deleteFood(itemTitle);
-        adapter.onChangeDataSet(mDbAdapter.getFoods());
+        mDbAdapter.deleteItem(itemTitle);
+        adapter.onChangeDataSet(mDbAdapter.getItems());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.yurima.weightloser.database;
+package com.yurima.weightloser.food.database;
 
 import android.provider.BaseColumns;
 

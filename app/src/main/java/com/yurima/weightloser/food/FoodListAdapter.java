@@ -1,17 +1,12 @@
 package com.yurima.weightloser.food;
 
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yurima.weightloser.R;
-import com.yurima.weightloser.database.DbContract;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +33,7 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     public void onBindViewHolder(ViewHolder holder, int position) {//
           holder.nameTextView.setText(foods.get(position).getTitle());
           holder.unitTextView.setText(foods.get(position).getUnit());
-          holder.valueTextView.setText(foods.get(position).getValue());
+          holder.valueTextView.setText(String.valueOf(foods.get(position).getValue()));
     }
 
     @Override
