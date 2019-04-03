@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.yurima.weightloser.food.FoodActivity;
+import com.yurima.weightloser.weight.WeightActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

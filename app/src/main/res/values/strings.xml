@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeightLoser</string>
+    <string name="arrow_left"><![CDATA[<]]></string>
+    <string name="arrow_right"><![CDATA[>]]></string>
 </resources>

@@ -1,7 +1,9 @@
-package com.yurima.weightloser;
+package com.yurima.weightloser.weight;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.yurima.weightloser.R;
 
 public class WeightActivity extends AppCompatActivity {
 
