@@ -50,7 +50,8 @@ public class DbAdapter {
     }
 
     public List<Food> getItems() {
-        Cursor cursor = mDatabase.query(DbContract.FoodEntry.TABLE_NAME, null, null, null,null,null,null);
+        String orderBy = DbContract.FoodEntry.COLUMN_NAME_TITLE + " ASC";
+        Cursor cursor = mDatabase.query(DbContract.FoodEntry.TABLE_NAME, null, null, null, null, null, orderBy);
         List<Food> foodList = new ArrayList<>();
         while(cursor.moveToNext()) {
             foodList.add(new Food (
