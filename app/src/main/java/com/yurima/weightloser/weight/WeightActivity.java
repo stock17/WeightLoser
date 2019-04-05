@@ -15,6 +15,7 @@ import com.yurima.weightloser.R;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,8 @@ import static android.R.attr.data;
 import static android.R.attr.format;
 
 public class WeightActivity extends AppCompatActivity {
+
+    WeightDbAdapter mDbAdapter = new WeightDbAdapter(this);
 
     Date date = new Date();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.mm.yy");
@@ -51,6 +54,11 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         ButterKnife.bind(this);
         refresh();
+
+        mDbAdapter.openDB();
+        mDbAdapter.clearTable();
+        mDbAdapter.createMockTable();
+        Map<Date,Double> map = mDbAdapter.getItems();
     }
 
     private void refresh() {

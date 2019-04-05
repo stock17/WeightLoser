@@ -16,8 +16,8 @@ public class WeightDbHelper  extends SQLiteOpenHelper {
     private static final String SQL_CREATE_WEIGHT_TABLE =
             "CREATE TABLE " + WeightEntry.TABLE_NAME + " (" +
                     WeightEntry._ID + " INTEGER PRIMARY KEY," +
-                    WeightEntry.COLUMN_NAME_DATE + " TEXT," +
-                    WeightEntry.COLUMN_NAME_VALUE + " INTEGER)";
+                    WeightEntry.COLUMN_NAME_DATE + " DATE," +
+                    WeightEntry.COLUMN_NAME_VALUE + " REAL)";
 
     private static final String SQL_DELETE_FOOD_TABLE =
             "DROP TABLE IF EXISTS " + WeightEntry.TABLE_NAME;
