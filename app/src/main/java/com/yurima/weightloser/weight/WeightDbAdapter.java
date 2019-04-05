@@ -51,6 +51,7 @@ public class WeightDbAdapter {
         values.put(WeightDbContract.WeightEntry.COLUMN_NAME_DATE, sdf.format(date));
         values.put(WeightDbContract.WeightEntry.COLUMN_NAME_VALUE, weight);
         return mDatabase.insert(WeightDbContract.WeightEntry.TABLE_NAME, null, values);
+
     }
 
     public int deleteItem(String title) {

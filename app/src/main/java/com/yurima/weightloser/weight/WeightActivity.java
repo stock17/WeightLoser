@@ -68,7 +68,7 @@ public class WeightActivity extends AppCompatActivity {
 
         dateTextView.setText(simpleDateFormat.format(date));
         if (data.containsKey(date)){
-            weightEditText.setText(data.get(date).toString());
+            weightEditText.setText(String.valueOf(data.get(date).toString()));
         }
         else{
             weightEditText.setText("");
