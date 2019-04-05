@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/textView_date"
+        android:id="@+id/textview_date"
         android:layout_width="144dp"
         android:layout_height="48dp"
         android:textSize="32sp"
@@ -22,25 +22,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_minus"
-        android:layout_alignTop="@+id/textView_date"
-        android:layout_toLeftOf="@+id/textView_date"
-        android:layout_toStartOf="@+id/textView_date" />
+        android:layout_alignTop="@+id/textview_date"
+        android:layout_toLeftOf="@+id/textview_date"
+        android:layout_toStartOf="@+id/textview_date" />
 
     <Button
         android:id="@+id/button_increase_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_plus"
-        android:layout_alignTop="@+id/textView_date"
-        android:layout_toRightOf="@+id/textView_date"
-        android:layout_toEndOf="@+id/textView_date" />
+        android:layout_alignTop="@+id/textview_date"
+        android:layout_toRightOf="@+id/textview_date"
+        android:layout_toEndOf="@+id/textview_date" />
 
     <EditText
         android:id="@+id/editText_weight"
         android:layout_width="144dp"
         android:layout_height="72dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView_date"
+        android:layout_below="@+id/textview_date"
         android:layout_marginTop="40dp"
         android:ems="40"
         android:maxLength="5"
