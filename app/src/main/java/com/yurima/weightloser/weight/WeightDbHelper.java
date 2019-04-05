@@ -11,7 +11,7 @@ import com.yurima.weightloser.weight.WeightDbContract.WeightEntry;
 public class WeightDbHelper  extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Data.db";
+    public static final String DATABASE_NAME = "weightdata.db";
 
     private static final String SQL_CREATE_WEIGHT_TABLE =
             "CREATE TABLE " + WeightEntry.TABLE_NAME + " (" +

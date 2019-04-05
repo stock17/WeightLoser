@@ -1,7 +1,8 @@
 package com.yurima.weightloser.weight;
 
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,8 @@ import static android.R.attr.format;
 public class WeightActivity extends AppCompatActivity {
 
     Date date = new Date();
-    DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.mm.yy");
+
 
     long DAY = 1000 * 60 * 60 * 24;
     long WEEK = DAY * 7;
@@ -49,12 +51,14 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         ButterKnife.bind(this);
         refresh();
-
     }
 
     private void refresh() {
 
-        dateTextView.setText(dateFormat.format(date));
+        dateTextView.setText(simpleDateFormat.format(date));
+
+        //DEBUG
+        Toast.makeText(this, simpleDateFormat.format(date), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.button_decrease_date)
@@ -100,6 +104,8 @@ public class WeightActivity extends AppCompatActivity {
     }
 
     private void saveData(){
+        //TODO
         Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+
     }
 }
