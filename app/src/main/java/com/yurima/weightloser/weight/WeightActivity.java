@@ -28,9 +28,10 @@ import static android.R.attr.format;
 public class WeightActivity extends AppCompatActivity {
 
     WeightDbAdapter mDbAdapter = new WeightDbAdapter(this);
+    Map<Date, Double> data;
 
-    Date date = new Date();
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.mm.yy");
+    Date date = getToday();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy");
 
 
     long DAY = 1000 * 60 * 60 * 24;
@@ -53,20 +54,25 @@ public class WeightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weight);
         ButterKnife.bind(this);
-        refresh();
+
 
         mDbAdapter.openDB();
         mDbAdapter.clearTable();
         mDbAdapter.createMockTable();
-        Map<Date,Double> map = mDbAdapter.getItems();
+        data = mDbAdapter.getItems();
+
+        refresh();
     }
 
     private void refresh() {
 
         dateTextView.setText(simpleDateFormat.format(date));
-
-        //DEBUG
-        Toast.makeText(this, simpleDateFormat.format(date), Toast.LENGTH_SHORT).show();
+        if (data.containsKey(date)){
+            weightEditText.setText(data.get(date).toString());
+        }
+        else{
+            weightEditText.setText("");
+        }
     }
 
     @OnClick(R.id.button_decrease_date)
@@ -105,7 +111,7 @@ public class WeightActivity extends AppCompatActivity {
     }
 
     private boolean checkData(){
-        if (data == 0) return false;
+        if (date.getTime() == 0) return false;
         String text = weightEditText.getText().toString();
         if (text.isEmpty() || Double.parseDouble(text) > MAX_WEIGHT) return false;
         return true;
@@ -115,5 +121,14 @@ public class WeightActivity extends AppCompatActivity {
         //TODO
         Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
 
+    }
+
+    private Date getToday(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 }
