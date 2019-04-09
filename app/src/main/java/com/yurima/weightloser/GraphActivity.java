@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.yurima.weightloser.weight.WeightDbAdapter;
@@ -39,26 +40,30 @@ public class GraphActivity extends AppCompatActivity {
         mDbAdapter.openDB();
         data = mDbAdapter.getItems();
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-
-        });
-
-
-
+        DataPoint[] points = new DataPoint[data.size()];
         Iterator<Map.Entry<Date, Double>> it = data.entrySet().iterator();
+        int n = 0;
         while (it.hasNext()) {
             Map.Entry<Date, Double> pair = it.next();
             Calendar c = Calendar.getInstance();
             c.setTime(pair.getKey());
             int day = c.get(Calendar.DAY_OF_MONTH);
             double val = pair.getValue();
-            series.appendData(new DataPoint(day, val), false, 7);
+            points[n] = new DataPoint(pair.getKey(), val);
+            n++;
         }
 
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
         graphView.addSeries(series);
 
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+//        graphView.getViewport().setMinX(points[0].getX());
+//        graphView.getViewport().setMaxX(points[99].getX());
+//        graphView.getViewport().setXAxisBoundsManual(true);
 
-
+// as we use dates as labels, the human rounding to nice readable numbers
+// is not necessary
+        graphView.getGridLabelRenderer().setHumanRounding(false);
 
 
     }
