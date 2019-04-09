@@ -119,7 +119,10 @@ public class WeightActivity extends AppCompatActivity {
 
     private void saveData(){
         //TODO
+        double weight = Double.parseDouble(weightEditText.getText().toString());
+        mDbAdapter.insertItem(date, weight);
         Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+        data = mDbAdapter.getItems();
 
     }
 
