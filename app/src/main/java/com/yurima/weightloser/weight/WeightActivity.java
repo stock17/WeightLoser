@@ -55,10 +55,7 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         ButterKnife.bind(this);
 
-
         mDbAdapter.openDB();
-        mDbAdapter.clearTable();
-        mDbAdapter.createMockTable();
         data = mDbAdapter.getItems();
 
         refresh();
@@ -118,12 +115,10 @@ public class WeightActivity extends AppCompatActivity {
     }
 
     private void saveData(){
-        //TODO
         double weight = Double.parseDouble(weightEditText.getText().toString());
         mDbAdapter.insertItem(date, weight);
         Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
         data = mDbAdapter.getItems();
-
     }
 
     private Date getToday(){
@@ -133,5 +128,17 @@ public class WeightActivity extends AppCompatActivity {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDbAdapter.openDB();
+    }
+
+    @Override
+    protected void onStop() {
+        mDbAdapter.closeDB();
+        super.onStop();
     }
 }

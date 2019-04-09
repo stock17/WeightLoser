@@ -82,8 +82,8 @@ public class WeightDbAdapter {
     }
 
     public void createMockTable() {
-        insertItem(new Date(), 85);
-        insertItem(new Date(new Date().getTime() - 1000 * 60 * 60 * 24), 84);
-        insertItem(new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 2), 83);
+        insertItem(new Date(), 75);
+        insertItem(new Date(new Date().getTime() - 1000 * 60 * 60 * 24), 74);
+        insertItem(new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 2), 73);
     }
 }
