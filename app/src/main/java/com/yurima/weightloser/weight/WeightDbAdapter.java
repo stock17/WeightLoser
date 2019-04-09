@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static android.R.attr.value;
 import static com.yurima.weightloser.food.database.DbContract.FoodEntry.COLUMN_NAME_TITLE;
@@ -67,7 +68,7 @@ public class WeightDbAdapter {
     public Map<Date, Double> getItems()  {
         String orderBy = WeightDbContract.WeightEntry.COLUMN_NAME_DATE + " ASC";
         Cursor cursor = mDatabase.query(WeightDbContract.WeightEntry.TABLE_NAME, null, null, null, null, null, orderBy);
-        Map<Date, Double> map = new HashMap<>();
+        Map<Date, Double> map = new TreeMap<>();
 
         while(cursor.moveToNext()) {
             try {
