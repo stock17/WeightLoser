@@ -45,11 +45,7 @@ public class GraphActivity extends AppCompatActivity {
         int n = 0;
         while (it.hasNext()) {
             Map.Entry<Date, Double> pair = it.next();
-            Calendar c = Calendar.getInstance();
-            c.setTime(pair.getKey());
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            double val = pair.getValue();
-            points[n] = new DataPoint(pair.getKey(), val);
+            points[n] = new DataPoint(pair.getKey(), pair.getValue());
             n++;
         }
 
@@ -57,9 +53,12 @@ public class GraphActivity extends AppCompatActivity {
         graphView.addSeries(series);
 
         graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
-//        graphView.getViewport().setMinX(points[0].getX());
-//        graphView.getViewport().setMaxX(points[99].getX());
-//        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+
+// set manual x bounds to have nice steps
+        graphView.getViewport().setMinX(points[0].getX());
+        graphView.getViewport().setMaxX(points[data.size() - 1].getX());
+        graphView.getViewport().setXAxisBoundsManual(true);
 
 // as we use dates as labels, the human rounding to nice readable numbers
 // is not necessary
