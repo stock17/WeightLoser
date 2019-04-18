@@ -55,9 +55,8 @@ public class WeightDbAdapter {
 
     }
 
-    public int deleteItem(String title) {
-        //TODO
-        String whereClause = "TITLE = '" + title+ "'";
+    public int deleteItem(Date date) {
+        String whereClause = "DATE = '" + sdf.format(date)+ "'";
         return mDatabase.delete(DbContract.FoodEntry.TABLE_NAME, whereClause, null);
     }
 
