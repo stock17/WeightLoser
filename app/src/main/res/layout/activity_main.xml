@@ -7,29 +7,49 @@
     android:orientation="vertical"
     tools:context="com.yurima.weightloser.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_weight_activity"
+            android:text="WEIGHT"
+            android:background="@drawable/weight"
+            style="@style/MainActivityButtonStyle"
+            />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_weight_activity"
-        android:text="WEIGHT"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_food_activity"
+            android:text="FOOD"
+            android:background="@drawable/food"
+            style="@style/MainActivityButtonStyle"
+            />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_food_activity"
-        android:text="FOOD"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_graph_activity"
+            android:text="GRAPH"
+            android:background="@drawable/graph"
+            style="@style/MainActivityButtonStyle"
+            />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_graph_activity"
-        android:text="GRAPH"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+
+
+
+
 
 </LinearLayout>
