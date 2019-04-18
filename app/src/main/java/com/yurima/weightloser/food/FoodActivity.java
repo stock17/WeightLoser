@@ -168,9 +168,6 @@ public class FoodActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        TextView view = (TextView) dialog.findViewById(message);
-        view.setGravity(Gravity.CENTER);
-
     }
 
     private void insertFood(String title, int unit, int value) {
