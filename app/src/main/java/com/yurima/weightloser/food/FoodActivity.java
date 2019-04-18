@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.database.DbAdapter;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.R.attr.value;
+import static android.R.id.message;
 
 public class FoodActivity extends AppCompatActivity {
 
@@ -145,8 +148,29 @@ public class FoodActivity extends AppCompatActivity {
     }
 
     private void onClearTableButtonClick() {
-        mDbAdapter.clearTable();
-        adapter.onChangeDataSet(mDbAdapter.getItems());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.ClearAlertDialog);
+        builder
+                .setMessage("Warning!\n It'll destroy all the data.\n Are you sure?")
+                .setPositiveButton("SURE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDbAdapter.clearTable();
+                adapter.onChangeDataSet(mDbAdapter.getItems());
+            }
+        })
+
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView view = (TextView) dialog.findViewById(message);
+        view.setGravity(Gravity.CENTER);
+
     }
 
     private void insertFood(String title, int unit, int value) {
