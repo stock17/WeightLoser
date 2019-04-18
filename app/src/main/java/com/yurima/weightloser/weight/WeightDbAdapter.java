@@ -38,12 +38,12 @@ public class WeightDbAdapter {
     }
 
     public void openDB(){
-        if (mDatabase == null)
+        if (mDatabase == null || !mDatabase.isOpen())
             mDatabase = mHelper.getWritableDatabase();
     }
 
     public void closeDB(){
-        if (mDatabase != null)
+        if (mDatabase != null && mDatabase.isOpen())
             mDatabase.close();
     }
 
