@@ -10,17 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-        <Button
-            android:id="@+id/btn_weight_activity"
-            android:text="WEIGHT"
-            android:background="@drawable/weight"
-            style="@style/MainActivityButtonStyle"
-            />
-    </LinearLayout>
+        android:layout_weight="4"
+        android:gravity="center"></LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -31,25 +25,18 @@
             android:background="@drawable/food"
             style="@style/MainActivityButtonStyle"
             />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
         <Button
             android:id="@+id/btn_graph_activity"
-            android:text="GRAPH"
-            android:background="@drawable/graph"
             style="@style/MainActivityButtonStyle"
-            />
+            android:background="@drawable/graph"
+            android:text="GRAPH" />
+
+        <Button
+            android:id="@+id/btn_weight_activity"
+            style="@style/MainActivityButtonStyle"
+            android:background="@drawable/weight"
+            android:text="WEIGHT" />
     </LinearLayout>
-
-
-
-
-
-
 
 </LinearLayout>
