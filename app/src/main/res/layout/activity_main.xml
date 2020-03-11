@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context="com.yurima.weightloser.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
+        android:background="@drawable/sky"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:gravity="center"></LinearLayout>
+        >
+
+        <TextView
+            android:id="@+id/textview_date"
+            android:layout_width="256dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="11.03.2020"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            />
+
+        <TextView
+            android:id="@+id/textview_weight"
+            android:layout_below="@id/textview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-black"
+            android:text="85.5"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="72sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <LinearLayout
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="96dp"
+                android:layout_height="32dp"
+                android:id="@+id/textview_expected"
+                android:text="2000"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@drawable/rounder_corner"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="96dp"
+                android:layout_height="32dp"
+                android:id="@+id/textview_consumed"
+                android:text="2000"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@drawable/rounder_corner"
+                />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@android:color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
