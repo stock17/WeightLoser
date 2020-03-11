@@ -16,16 +16,6 @@
         />
 
     <TextView
-        android:id="@+id/tv_food_list_unit"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        />
-
-    <TextView
         android:id="@+id/tv_food_list_value"
         android:layout_width="0dp"
         android:layout_weight="1"

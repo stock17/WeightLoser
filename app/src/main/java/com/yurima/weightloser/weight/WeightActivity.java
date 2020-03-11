@@ -45,7 +45,8 @@ public class WeightActivity extends AppCompatActivity {
     Button decreaseDateButton;
     @BindView(R.id.button_increase_date)
     Button increaseDateButton;
-    @BindView(R.id.button_weight_ok) Button okButton;
+    @BindView(R.id.button_weight_ok)
+    Button okButton;
     @BindView(R.id.editText_weight)
     EditText weightEditText;
 

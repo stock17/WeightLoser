@@ -32,7 +32,6 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.nameTextView.setText(foods.get(position).getTitle());
-        holder.unitTextView.setText(foods.get(position).getStringUnit());
         holder.valueTextView.setText(String.valueOf(foods.get(position).getValue()));
     }
 
@@ -44,7 +43,6 @@ public class FoodListAdapter extends RecyclerView.Adapter <FoodListAdapter.ViewH
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_food_list_name) TextView nameTextView;
-        @BindView(R.id.tv_food_list_unit) TextView unitTextView;
         @BindView(R.id.tv_food_list_value) TextView valueTextView;
 
         ViewHolder(View view){

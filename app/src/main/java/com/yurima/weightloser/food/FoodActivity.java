@@ -171,7 +171,7 @@ public class FoodActivity extends AppCompatActivity {
     }
 
     private void insertFood(String title, int unit, int value) {
-        mDbAdapter.insertItem(title, unit, value);
+        mDbAdapter.insertItem(title, value);
         adapter.onChangeDataSet(mDbAdapter.getItems());
     }
 
