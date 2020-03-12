@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="com.yurima.weightloser.MainActivity">
+    tools:context="com.yurima.weightloser.main.MainActivity">
 
     <RelativeLayout
         android:background="@drawable/sky"

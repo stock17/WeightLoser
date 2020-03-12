@@ -1,10 +1,12 @@
-package com.yurima.weightloser;
+package com.yurima.weightloser.main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.yurima.weightloser.GraphActivity;
+import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.FoodActivity;
 import com.yurima.weightloser.weight.WeightActivity;
 
