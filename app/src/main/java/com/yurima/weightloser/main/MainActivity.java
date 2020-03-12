@@ -10,6 +10,9 @@ import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.FoodActivity;
 import com.yurima.weightloser.weight.WeightActivity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return;
         }
+
+
 
         startActivity(intent);
     }
