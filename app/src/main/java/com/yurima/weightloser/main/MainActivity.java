@@ -4,20 +4,16 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
-
+import android.widget.TextView;
 import com.yurima.weightloser.GraphActivity;
 import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.FoodActivity;
 import com.yurima.weightloser.weight.WeightActivity;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IView{
 
     @BindView(R.id.btn_weight_activity)
     Button weightActivityButton;
@@ -25,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
     Button foodActivityButton;
     @BindView(R.id.btn_graph_activity)
     Button graphActivityButton;
+    @BindView(R.id.textview_expected)
+    TextView expectedCaloriesTextview;
+    @BindView(R.id.textview_consumed)
+    TextView consumedCaloriesTextview;
+    @BindView(R.id.textview_weight)
+    TextView weightTextview;
+    @BindView(R.id.textview_date)
+    TextView dateTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,27 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
 
-
-
         startActivity(intent);
     }
 
+
+    @Override
+    public void showExpectedCalories(String cal) {
+        expectedCaloriesTextview.setText(cal);
+    }
+
+    @Override
+    public void showConsumedCalories(String cal) {
+        consumedCaloriesTextview.setText(cal);
+    }
+
+    @Override
+    public void showWeight(String weight) {
+        weightTextview.setText(weight);
+    }
+
+    @Override
+    public void showDate(String date) {
+        dateTextview.setText(date);
+    }
 }
