@@ -19,10 +19,17 @@ public class MainPresenter {
         mView = view;
         mModel = model;
 
-        // for the testing
+        loadDate();
+
+        // for the testing ********************
         mPoint = new DayPoint(DateAdapter.getTodayTime(), 77);
         mPoint.setConsumedCalories(1880);
         updateView();
+        // *************************************
+    }
+
+    private void loadDate() {
+        mData = mModel.getDayPointList();
     }
 
     public void updateView(){
