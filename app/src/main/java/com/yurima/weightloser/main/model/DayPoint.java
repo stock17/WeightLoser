@@ -1,19 +1,43 @@
 package com.yurima.weightloser.main.model;
 
-import java.util.Calendar;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
+import java.time.LocalDate;
 
 
+@Entity
 public class DayPoint {
 
-    private Calendar date;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo
+    private LocalDate date;
+    @ColumnInfo
     private double weight;
+    @ColumnInfo
     private double consumedCalories;
 
-    public Calendar getDate() {
+    public DayPoint (int id, LocalDate date, double weight) {
+        this.id = id;
+        this.date = date;
+        this.weight = weight;
+    }
+
+    @Ignore
+    public DayPoint (LocalDate date, double weight) {
+        this.date = date;
+        this.weight = weight;
+    }
+
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
