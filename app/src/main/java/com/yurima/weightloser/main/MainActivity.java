@@ -1,5 +1,6 @@
 package com.yurima.weightloser.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,15 @@ import android.widget.TextView;
 import com.yurima.weightloser.GraphActivity;
 import com.yurima.weightloser.R;
 import com.yurima.weightloser.food.FoodActivity;
+import com.yurima.weightloser.main.model.MainModel;
 import com.yurima.weightloser.weight.WeightActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements IView{
+public class MainActivity extends AppCompatActivity implements MainView {
+
+    MainPresenter mPresenter;
 
     @BindView(R.id.btn_weight_activity)
     Button weightActivityButton;
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements IView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mPresenter = new MainPresenter(this, new MainModel(this));
     }
 
     @OnClick({R.id.btn_graph_activity, R.id.btn_weight_activity, R.id.btn_food_activity})
