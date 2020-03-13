@@ -1,19 +1,35 @@
 package com.yurima.weightloser.main;
 
+import android.graphics.Point;
+
 import com.yurima.weightloser.main.model.DayPoint;
 import com.yurima.weightloser.main.model.MainModel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MainPresenter {
 
-    List<DayPoint> mData;
-    MainView mView;
-    MainModel mModel;
+    private List<DayPoint> mData;
+    private DayPoint mPoint;
+    private MainView mView;
+    private MainModel mModel;
 
     public MainPresenter(MainView view, MainModel model) {
         mView = view;
         mModel = model;
+
+        // for the testing
+        mPoint = new DayPoint(DateAdapter.getTodayTime(), 77);
+        mPoint.setConsumedCalories(1880);
+        updateView();
+    }
+
+    public void updateView(){
+        mView.showDate(DateAdapter.TimestampToString(mPoint.getDate()));
+        mView.showExpectedCalories("2000");
+        mView.showConsumedCalories(String.valueOf(mPoint.getConsumedCalories()));
+        mView.showWeight(String.valueOf(mPoint.getWeight()));
     }
 
 
