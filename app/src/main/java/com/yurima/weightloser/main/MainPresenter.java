@@ -19,7 +19,7 @@ public class MainPresenter {
         mView = view;
         mModel = model;
 
-        loadDate();
+//        loadData();
 
         // for the testing ********************
         mPoint = new DayPoint(DateAdapter.getTodayTime(), 77);
@@ -28,7 +28,7 @@ public class MainPresenter {
         // *************************************
     }
 
-    private void loadDate() {
+    private void loadData() {
         mData = mModel.getDayPointList();
     }
 
