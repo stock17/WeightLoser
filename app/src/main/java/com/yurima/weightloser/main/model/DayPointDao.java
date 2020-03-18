@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface DayPointDao {
 
-    @Query("SELECT * from daypoint")
+    @Query("SELECT * from daypoint_db")
     List<DayPoint> getDayPoints();
 
     @Insert

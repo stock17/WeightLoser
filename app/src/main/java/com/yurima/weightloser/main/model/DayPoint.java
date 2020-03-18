@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 
-@Entity
+@Entity (tableName = "daypoint_db")
 public class DayPoint {
 
     @PrimaryKey(autoGenerate = true)
