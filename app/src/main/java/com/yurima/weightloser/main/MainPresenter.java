@@ -7,6 +7,7 @@ import com.yurima.weightloser.main.model.MainModel;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class MainPresenter {
 
@@ -29,12 +30,12 @@ public class MainPresenter {
     }
 
     private void loadData() {
-        new Thread(new Runnable() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mModel.getDayPointList();
+                mData = mModel.getDayPointList();
             }
-        }).run();
+        });
     }
 
     public void updateView(){
